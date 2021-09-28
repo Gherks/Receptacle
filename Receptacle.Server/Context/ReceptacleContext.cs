@@ -15,7 +15,6 @@ namespace Receptacle.Server.Context
             this.ChangeTracker.LazyLoadingEnabled = false;
         }
 
-        public DbSet<Article> Article { get; set; }
         public DbSet<Recipe> Recipe { get; set; }
         public DbSet<Ingredient> Ingredient { get; set; }
     }
