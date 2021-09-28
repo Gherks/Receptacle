@@ -19,9 +19,11 @@ namespace Receptacle.Server.Extensions
             // Repositories
             services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
             services.AddScoped<IArticleRepository, ArticleRepository>();
+            services.AddScoped<IIngredientsRepository, IngredientsRepository>();
 
             // Services
             services.AddScoped<IArticleService, ArticleService>();
+            services.AddScoped<IIngredientsService, IngredientsService>();
 
             return services;
         }
