@@ -4,7 +4,7 @@ import Layout from './components/Layout';
 import Home from './components/Home';
 import Counter from './components/Counter';
 import FetchData from './components/FetchData';
-import Ingredients from './components/ingredients/Ingredients';
+import Ingredients from './components/ingredientPage/IngredientPage';
 
 import './custom.css'
 

@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Ingredient from './Ingredient'
 
-export default function IngredientsTable() {
-    const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-
-    useEffect(() => {
-        fetch("api/ingredients")
-            .then(response => response.json())
-            .then(_ingredients => setIngredients(_ingredients));
-    }, []);
-
+export default function IngredientsTable(props: { ingredients: Ingredient[] }) {
     return (
         <>
             <table className="table table-hover table-striped table-sm">
@@ -23,7 +15,7 @@ export default function IngredientsTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    {ingredients.map(ingredient => {
+                    {props.ingredients.map(ingredient => {
                         return (
                             <tr key={ingredient.id}>
                                 <td>{ingredient.name}</td>
