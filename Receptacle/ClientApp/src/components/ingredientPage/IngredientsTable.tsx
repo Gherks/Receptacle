@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Ingredient from './Ingredient'
+import Ingredient from './Ingredient';
 
 export default function IngredientsTable(props: { ingredients: Ingredient[] }) {
     return (
