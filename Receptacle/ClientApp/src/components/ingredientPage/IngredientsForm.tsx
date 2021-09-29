@@ -1,18 +1,63 @@
-import React, { ChangeEventHandler } from 'react';
+import React, { ChangeEventHandler, SyntheticEvent, useState } from 'react';
 import Ingredient from './Ingredient';
+import TextInput from './../common/TextInput';
+import NumberInput from './../common/NumberInput';
 
-function IngredientsForm(props: { ingredientForm: Ingredient, onChange: ChangeEventHandler<HTMLInputElement> }) {
+function IngredientsForm(props: { ingredientForm: Ingredient, onChange: React.ChangeEventHandler<HTMLInputElement>, onSubmit }) {
     return (
-        <>
-            <div className="input-group mb-3">
-                <input value={props.ingredientForm.name} onChange={props.onChange} id="name" name="name" type="text" className="form-control" placeholder="Name" aria-label="Name" />
-                <input value={props.ingredientForm.fat} onChange={props.onChange} id="fat" name="fat" type="text" className="form-control" placeholder="Fat" aria-label="Fat" />
-                <input value={props.ingredientForm.carbohydrates} onChange={props.onChange} id="carbohydrates" name="carbohydrates" type="text" className="form-control" placeholder="Carbohydrates" aria-label="Carbohydrates" />
-                <input value={props.ingredientForm.protein} onChange={props.onChange} id="protein" name="protein" type="text" className="form-control" placeholder="Protein" aria-label="Protein" />
-                <input value={props.ingredientForm.calories} onChange={props.onChange} id="calories" name="calories" type="text" className="form-control" placeholder="Calories" aria-label="Calories" />
-                <button className="btn btn-primary">Add</button>
-            </div>
-        </>
+        <div className="input-group mb-3">
+            <TextInput
+                inputForm={{
+                    id: "name",
+                    name: "name",
+                    placeholder: "Name",
+                    value: props.ingredientForm.name,
+                    onChange: props.onChange
+                }}
+                error={""}
+            />
+            <NumberInput
+                inputForm={{
+                    id: "fat",
+                    name: "fat",
+                    placeholder: "Fat",
+                    value: props.ingredientForm.fat,
+                    onChange: props.onChange
+                }}
+                error={""}
+            />
+            <NumberInput
+                inputForm={{
+                    id: "carbohydrates",
+                    name: "carbohydrates",
+                    placeholder: "Carbohydrates",
+                    value: props.ingredientForm.carbohydrates,
+                    onChange: props.onChange
+                }}
+                error={""}
+            />
+            <NumberInput
+                inputForm={{
+                    id: "protein",
+                    name: "protein",
+                    placeholder: "Protein",
+                    value: props.ingredientForm.protein,
+                    onChange: props.onChange
+                }}
+                error={""}
+            />
+            <NumberInput
+                inputForm={{
+                    id: "calories",
+                    name: "calories",
+                    placeholder: "Calories",
+                    value: props.ingredientForm.calories,
+                    onChange: props.onChange
+                }}
+                error={""}
+            />
+            <button className="btn btn-primary">Add</button>
+        </div>
     );
 };
 
