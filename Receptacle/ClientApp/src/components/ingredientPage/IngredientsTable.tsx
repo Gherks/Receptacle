@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Ingredient from './Ingredient';
 
 export default function IngredientsTable(props: { ingredients: Ingredient[] }) {

@@ -2,27 +2,12 @@ import React, { useState, useEffect, SyntheticEvent } from 'react';
 import IngredientsForm from './IngredientsForm';
 import IngredientsTable from './IngredientsTable';
 import Ingredient from './Ingredient';
+import IngredientErrorForm from './IngredientErrorForm';
 
-interface IngredientErrorForm {
-    name: string,
-    fat: string,
-    carbohydrates: string,
-    protein: string,
-    calories: string
-}
-
-function Ingredients() {
-    const [ingredientForm, setIngredientForm] = useState<Ingredient>({
-        id: "",
-        name: "",
-        fat: 0,
-        carbohydrates: 0,
-        protein: 0,
-        calories: 0
-    })
-
+export default function Ingredients() {
+    const [ingredientForm, setIngredientForm] = useState<Ingredient>(new Ingredient());
     const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-    const [error, setError] = useState<IngredientErrorForm>();
+    const [errors, setErrors] = useState<IngredientErrorForm>(new IngredientErrorForm());
 
     function handleChange(event: SyntheticEvent) {
         const target = event.target as HTMLInputElement;
@@ -34,44 +19,47 @@ function Ingredients() {
         if (!formIsValid()) {
             return;
         }
-        // Save stuff
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: ingredientForm.name,
+                fat: ingredientForm.fat,
+                carbohydrates: ingredientForm.carbohydrates,
+                protein: ingredientForm.protein,
+                calories: ingredientForm.calories
+            })
+        };
+        fetch('api/ingredients', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                let newIngredients = ingredients.slice();
+                newIngredients.push({
+                    id: data.id,
+                    name: data.name,
+                    fat: data.fat,
+                    carbohydrates: data.carbohydrates,
+                    protein: data.protein,
+                    calories: data.calories,
+                });
+
+                setIngredients(newIngredients);
+            });
     }
 
     function formIsValid() {
-        const _errors: IngredientErrorForm = {
-            name: "",
-            fat: "",
-            carbohydrates: "",
-            protein: "",
-            calories: ""
-        };
+        let _errors: any = {};
 
-        let hasErrors = false;
+        if (!ingredientForm.name) _errors.name = "Name is required";
+        if (ingredientForm.fat <= 0) _errors.fat = "Fat must be greater than zero";
+        if (ingredientForm.carbohydrates <= 0) _errors.carbohydrates = "Carbohydrates must be greater than zero";
+        if (ingredientForm.protein <= 0) _errors.protein = "Protein must be greater than zero";
+        if (ingredientForm.calories <= 0) _errors.calories = "Calories must be greater than zero";
 
-        if (!ingredientForm.name) {
-            _errors.name = "Name is required";
-            hasErrors = true;
-        }
-        if (ingredientForm.fat <= 0) {
-            _errors.fat = "Fat must be greater than zero";
-            hasErrors = true;
-        }
-        if (ingredientForm.carbohydrates <= 0) {
-            _errors.carbohydrates = "Carbohydrates must be greater than zero";
-            hasErrors = true;
-        }
-        if (ingredientForm.protein <= 0) {
-            _errors.protein = "Protein must be greater than zero";
-            hasErrors = true;
-        }
-        if (ingredientForm.calories <= 0) {
-            _errors.calories = "Calories must be greater than zero";
-            hasErrors = true;
-        }
+        setErrors(_errors);
 
-        setError(_errors);
-
-        return hasErrors;
+        return Object.keys(_errors).length === 0;
     }
 
     useEffect(() => {
@@ -83,11 +71,8 @@ function Ingredients() {
     return (
         <>
             <h1>Ingredients</h1>
-            <p>This is a simple example of a React component.</p>
-            <IngredientsForm ingredientForm={ingredientForm} onChange={handleChange} onSubmit={handleSubmit}/>
+            <IngredientsForm ingredientForm={ingredientForm} onChange={handleChange} onSubmit={handleSubmit} errors={errors}/>
             <IngredientsTable ingredients={ingredients} />
         </>
     );
 };
-
-export default Ingredients;

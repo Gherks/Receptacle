@@ -1,11 +1,17 @@
-import React, { ChangeEventHandler, SyntheticEvent, useState } from 'react';
+import React, { ChangeEventHandler, FormEventHandler } from 'react';
 import Ingredient from './Ingredient';
 import TextInput from './../common/TextInput';
 import NumberInput from './../common/NumberInput';
+import IngredientErrorForm from './IngredientErrorForm';
 
-function IngredientsForm(props: { ingredientForm: Ingredient, onChange: React.ChangeEventHandler<HTMLInputElement>, onSubmit }) {
+function IngredientsForm(props: {
+    ingredientForm: Ingredient,
+    onChange: ChangeEventHandler<HTMLInputElement>,
+    onSubmit: FormEventHandler<HTMLFormElement>,
+    errors: IngredientErrorForm
+}) {
     return (
-        <div className="input-group mb-3">
+        <form className="input-group mb-3" onSubmit={props.onSubmit}>
             <TextInput
                 inputForm={{
                     id: "name",
@@ -14,7 +20,7 @@ function IngredientsForm(props: { ingredientForm: Ingredient, onChange: React.Ch
                     value: props.ingredientForm.name,
                     onChange: props.onChange
                 }}
-                error={""}
+                error={props.errors.name}
             />
             <NumberInput
                 inputForm={{
@@ -24,7 +30,7 @@ function IngredientsForm(props: { ingredientForm: Ingredient, onChange: React.Ch
                     value: props.ingredientForm.fat,
                     onChange: props.onChange
                 }}
-                error={""}
+                error={props.errors.fat}
             />
             <NumberInput
                 inputForm={{
@@ -34,7 +40,7 @@ function IngredientsForm(props: { ingredientForm: Ingredient, onChange: React.Ch
                     value: props.ingredientForm.carbohydrates,
                     onChange: props.onChange
                 }}
-                error={""}
+                error={props.errors.carbohydrates}
             />
             <NumberInput
                 inputForm={{
@@ -44,7 +50,7 @@ function IngredientsForm(props: { ingredientForm: Ingredient, onChange: React.Ch
                     value: props.ingredientForm.protein,
                     onChange: props.onChange
                 }}
-                error={""}
+                error={props.errors.protein}
             />
             <NumberInput
                 inputForm={{
@@ -54,10 +60,10 @@ function IngredientsForm(props: { ingredientForm: Ingredient, onChange: React.Ch
                     value: props.ingredientForm.calories,
                     onChange: props.onChange
                 }}
-                error={""}
+                error={props.errors.calories}
             />
-            <button className="btn btn-primary">Add</button>
-        </div>
+            <button className="btn btn-primary" type="submit">Add</button>
+        </form>
     );
 };
 

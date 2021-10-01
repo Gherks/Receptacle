@@ -3,7 +3,7 @@ import NumberInputForm from './NumberInputForm';
 
 export default function NumberInput(props: { inputForm: NumberInputForm, error: string }) {
     let wrapperClass = "form-group";
-    if (props.error.length > 0) {
+    if (props.error && props.error.length > 0) {
         wrapperClass += " has-error";
     }
 
