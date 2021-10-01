@@ -1,5 +1,5 @@
 import React from 'react';
-import Ingredient from './Ingredient';
+import Ingredient from '../../dto/Ingredient';
 
 export default function IngredientsTable(props: { ingredients: Ingredient[] }) {
     return (

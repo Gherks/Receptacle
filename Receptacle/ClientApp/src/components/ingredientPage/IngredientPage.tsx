@@ -1,7 +1,7 @@
 import React, { useState, useEffect, SyntheticEvent } from 'react';
 import IngredientsForm from './IngredientsForm';
 import IngredientsTable from './IngredientsTable';
-import Ingredient from './Ingredient';
+import Ingredient from '../../dto/Ingredient';
 import IngredientErrorForm from './IngredientErrorForm';
 
 export default function Ingredients() {
