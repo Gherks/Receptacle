@@ -50,5 +50,25 @@ namespace Receptacle.Server.Controllers
 
             return NoContent();
         }
+
+        [HttpPost]
+        public async Task<ActionResult<IngredientDto>> Post(IngredientDto ingredientDto)
+        {
+            //HttpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
+
+            try
+            {
+                if (ingredientDto == null)
+                {
+                    return BadRequest();
+                }
+
+                return Ok(await _service.SaveAsync(ingredientDto));
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
     }
 }

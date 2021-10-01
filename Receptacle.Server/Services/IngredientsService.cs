@@ -40,6 +40,22 @@ namespace Receptacle.Server.Services
             return entities.Select(ingredient => _mapper.Map<IngredientDto>(ingredient)).ToArray();
         }
 
+        public async Task<IngredientDto> SaveAsync(IngredientDto ingredientDto)
+        {
+            Ingredient ingredient = _mapper.Map<Ingredient>(ingredientDto);
+
+            if (ingredient.Id == Guid.Empty)
+            {
+                ingredient = await _repository.AddAsync(ingredient);
+            }
+            else
+            {
+                await _repository.UpdateAsync(ingredient);
+            }
+
+            return _mapper.Map<IngredientDto>(ingredient);
+        }
+
         public async Task DeleteAsync(Guid id)
         {
             var entity = await _repository.GetByIdAsync(id);
