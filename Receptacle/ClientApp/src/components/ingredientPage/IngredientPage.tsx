@@ -3,6 +3,7 @@ import IngredientsForm from './IngredientsForm';
 import IngredientsTable from './IngredientsTable';
 import Ingredient from '../../dto/Ingredient';
 import IngredientErrorForm from './IngredientErrorForm';
+import { getIngredients, saveIngredient } from '../../api/ingredientApi';
 
 export default function Ingredients() {
     const [ingredientForm, setIngredientForm] = useState<Ingredient>(new Ingredient());
@@ -19,32 +20,11 @@ export default function Ingredients() {
         if (!formIsValid()) {
             return;
         }
-
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                name: ingredientForm.name,
-                fat: ingredientForm.fat,
-                carbohydrates: ingredientForm.carbohydrates,
-                protein: ingredientForm.protein,
-                calories: ingredientForm.calories
-            })
-        };
-        fetch('api/ingredients', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                let newIngredients = ingredients.slice();
-                newIngredients.push({
-                    id: data.id,
-                    name: data.name,
-                    fat: data.fat,
-                    carbohydrates: data.carbohydrates,
-                    protein: data.protein,
-                    calories: data.calories,
-                });
-
-                setIngredients(newIngredients);
+        saveIngredient(ingredientForm)
+            .then(savedIngredient => {
+                let newIngredientsArray = ingredients.slice();
+                newIngredientsArray.push(savedIngredient);
+                setIngredients(newIngredientsArray);
             });
     }
 
@@ -63,15 +43,13 @@ export default function Ingredients() {
     }
 
     useEffect(() => {
-        fetch("api/ingredients")
-            .then(response => response.json())
-            .then(_ingredients => setIngredients(_ingredients));
+        getIngredients().then(_ingredients => setIngredients(_ingredients));
     }, []);
 
     return (
         <>
             <h1>Ingredients</h1>
-            <IngredientsForm ingredientForm={ingredientForm} onChange={handleChange} onSubmit={handleSubmit} errors={errors}/>
+            <IngredientsForm ingredientForm={ingredientForm} onChange={handleChange} onSubmit={handleSubmit} errors={errors} />
             <IngredientsTable ingredients={ingredients} />
         </>
     );

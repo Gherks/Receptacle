@@ -22,15 +22,14 @@ export function getIngredients() {
 //}
 
 export function saveIngredient(ingredient: Ingredient) {
-    return fetch(baseUrl + (ingredient.id || ""), {
-        method: ingredient.id ? "PUT" : "POST", // POST for create, PUT to update when id already exists.
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-            ...ingredient//,
-            // Parse authorId to a number (in case it was sent as a string).
-            //authorId: parseInt(ingredient.authorId, 10)
-        })
-    })
+    const { id, ...idlessIngredient } = ingredient;
+    const url: string = baseUrl + (ingredient.id || "");
+    const requestOptions = {
+        method: ingredient.id ? "PUT" : "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...((id) ? ingredient : idlessIngredient) })
+    };
+    return fetch(url, requestOptions)
         .then(handleResponse)
         .catch(handleError);
 }
