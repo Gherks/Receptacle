@@ -15,7 +15,7 @@ export default function NumberInput(props: { inputForm: NumberInputForm, error: 
                     name={props.inputForm.name}
                     className="form-control"
                     type="number"
-                    value={props.inputForm.value}
+                    value={props.inputForm.value || ""}
                     onChange={props.inputForm.onChange}
                     placeholder={props.inputForm.placeholder}
                     aria-label={props.inputForm.name} />
