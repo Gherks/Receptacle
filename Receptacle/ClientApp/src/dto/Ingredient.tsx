@@ -1,17 +1,8 @@
 export default class Ingredient {
-    id: string;
-    name: string;
-    fat: number;
-    carbohydrates: number;
-    protein: number;
-    calories: number;
-
-    constructor() {
-        this.id = "";
-        this.name = "";
-        this.fat = 0;
-        this.carbohydrates = 0;
-        this.protein = 0;
-        this.calories = 0;
-    }
+    id: string = "";
+    name: string = "";
+    fat: number = 0;
+    carbohydrates: number = 0;
+    protein: number = 0;
+    calories: number = 0;
 }
