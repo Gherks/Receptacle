@@ -7,25 +7,20 @@ export default function TextInput(props: { inputForm: TextInputForm, error: stri
         wrapperClass += " has-error";
     }
 
-    let inputClass = "form-control";
-    if (!props.error) {
-        inputClass += " is-valid";
-    }
-
     return (
         <div className={wrapperClass}>
             <div className="field">
                 <input
                     id={props.inputForm.id}
                     name={props.inputForm.name}
-                    className={inputClass}
+                    className="form-control"
                     type="text"
                     value={props.inputForm.value}
                     onChange={props.inputForm.onChange}
                     placeholder={props.inputForm.placeholder}
                     aria-label={props.inputForm.name} />
             </div>
-            {props.error && <div className="alert alert-danger">{props.error}</div>}
+            {props.error && <div className="text-danger"><small>{props.error}</small></div>}
         </div>
     );
 }

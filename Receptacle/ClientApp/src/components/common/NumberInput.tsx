@@ -20,7 +20,7 @@ export default function NumberInput(props: { inputForm: NumberInputForm, error: 
                     placeholder={props.inputForm.placeholder}
                     aria-label={props.inputForm.name} />
             </div>
-            {props.error && <div className="alert alert-danger">{props.error}</div>}
+            {props.error && <div className="text-danger"><small>{props.error}</small></div>}
         </div>
     );
 }
