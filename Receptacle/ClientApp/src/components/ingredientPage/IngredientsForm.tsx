@@ -11,59 +11,69 @@ function IngredientsForm(props: {
     errors: IngredientErrorForm
 }) {
     return (
-        <form className="input-group mb-3" onSubmit={props.onSubmit}>
-            <TextInput
-                inputForm={{
-                    id: "name",
-                    name: "name",
-                    placeholder: "Name",
-                    value: props.ingredientForm.name,
-                    onChange: props.onChange
-                }}
-                error={props.errors.name}
-            />
-            <NumberInput
-                inputForm={{
-                    id: "fat",
-                    name: "fat",
-                    placeholder: "Fat",
-                    value: props.ingredientForm.fat,
-                    onChange: props.onChange
-                }}
-                error={props.errors.fat}
-            />
-            <NumberInput
-                inputForm={{
-                    id: "carbohydrates",
-                    name: "carbohydrates",
-                    placeholder: "Carbohydrates",
-                    value: props.ingredientForm.carbohydrates,
-                    onChange: props.onChange
-                }}
-                error={props.errors.carbohydrates}
-            />
-            <NumberInput
-                inputForm={{
-                    id: "protein",
-                    name: "protein",
-                    placeholder: "Protein",
-                    value: props.ingredientForm.protein,
-                    onChange: props.onChange
-                }}
-                error={props.errors.protein}
-            />
-            <NumberInput
-                inputForm={{
-                    id: "calories",
-                    name: "calories",
-                    placeholder: "Calories",
-                    value: props.ingredientForm.calories,
-                    onChange: props.onChange
-                }}
-                error={props.errors.calories}
-            />
-            <button className="btn btn-primary" type="submit">Add</button>
-        </form>
+        <form className="mb-3" onSubmit={props.onSubmit}>
+            <div className="mb-2">
+                <TextInput
+                    inputForm={{
+                        id: "name",
+                        name: "name",
+                        placeholder: "Name",
+                        value: props.ingredientForm.name,
+                        onChange: props.onChange
+                    }}
+                    error={props.errors.name}
+                />
+            </div>
+            <div className="mb-2">
+                <NumberInput
+                    inputForm={{
+                        id: "fat",
+                        name: "fat",
+                        placeholder: "Fat",
+                        value: props.ingredientForm.fat,
+                        onChange: props.onChange
+                    }}
+                    error={props.errors.fat}
+                />
+            </div>
+            <div className="mb-2">
+                <NumberInput
+                    inputForm={{
+                        id: "carbohydrates",
+                        name: "carbohydrates",
+                        placeholder: "Carbohydrates",
+                        value: props.ingredientForm.carbohydrates,
+                        onChange: props.onChange
+                    }}
+                    error={props.errors.carbohydrates}
+                />
+            </div>
+            <div className="mb-2">
+                <NumberInput
+                    inputForm={{
+                        id: "protein",
+                        name: "protein",
+                        placeholder: "Protein",
+                        value: props.ingredientForm.protein,
+                        onChange: props.onChange
+                    }}
+                    error={props.errors.protein}
+                />
+            </div>
+            <div className="mb-2">
+                <NumberInput
+                    inputForm={{
+                        id: "calories",
+                        name: "calories",
+                        placeholder: "Calories",
+                        value: props.ingredientForm.calories,
+                        onChange: props.onChange
+                    }}
+                    error={props.errors.calories}
+                />
+            </div>
+            <button className="btn btn-primary" type="submit">Add ingredient</button>
+        </form >
     );
 };
 
