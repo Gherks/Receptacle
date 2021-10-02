@@ -17,7 +17,7 @@ export default function Ingredients() {
 
     function handleSubmit(event: SyntheticEvent) {
         event.preventDefault();
-        if (!formIsValid()) {
+        if (formIsInvalid()) {
             return;
         }
         saveIngredient(ingredientForm)
@@ -28,18 +28,29 @@ export default function Ingredients() {
             });
     }
 
-    function formIsValid() {
+    function formIsInvalid() {
         let _errors: any = {};
 
         if (!ingredientForm.name) _errors.name = "Name is required";
-        if (ingredientForm.fat <= 0) _errors.fat = "Fat must be greater than zero";
-        if (ingredientForm.carbohydrates <= 0) _errors.carbohydrates = "Carbohydrates must be greater than zero";
-        if (ingredientForm.protein <= 0) _errors.protein = "Protein must be greater than zero";
-        if (ingredientForm.calories <= 0) _errors.calories = "Calories must be greater than zero";
+
+        if (!ingredientForm.fat) _errors.fat = "Must provide a value for fat";
+        else if (ingredientForm.fat < 0) _errors.fat = "Fat cannot be less than 0";
+
+        if (!ingredientForm.fat) _errors.fat = "Must provide a value for fat";
+        else if (ingredientForm.fat < 0) _errors.fat = "Fat cannot be less than 0";
+
+        if (!ingredientForm.carbohydrates) _errors.carbohydrates = "Must provide a value for carbohydrates";
+        else if (ingredientForm.carbohydrates < 0) _errors.carbohydrates = "Carbohydrates cannot be less than 0";
+
+        if (!ingredientForm.protein) _errors.protein = "Must provide a value for protein";
+        else if (ingredientForm.protein < 0) _errors.protein = "Protein cannot be less than 0";
+
+        if (!ingredientForm.calories) _errors.calories = "Must provide a value for calories";
+        else if (ingredientForm.calories < 0) _errors.calories = "Calories cannot be less than 0";
 
         setErrors(_errors);
 
-        return Object.keys(_errors).length === 0;
+        return Object.keys(_errors).length >= 0;
     }
 
     useEffect(() => {
