@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Receptacle.Server", "Recept
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Receptacle.Shared", "Receptacle.Shared\Receptacle.Shared.csproj", "{32B164EA-EA1C-4A5A-8A29-9268B89417FA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Receptacle.Client", "Receptacle\Receptacle.Client.csproj", "{02B02282-F2A2-4A8E-8F31-08F1F0764660}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Receptacle.Client", "Receptacle.Client\Receptacle.Client.csproj", "{E98D92FD-1D7C-4397-A441-211041DE8ADD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{32B164EA-EA1C-4A5A-8A29-9268B89417FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32B164EA-EA1C-4A5A-8A29-9268B89417FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32B164EA-EA1C-4A5A-8A29-9268B89417FA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{02B02282-F2A2-4A8E-8F31-08F1F0764660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{02B02282-F2A2-4A8E-8F31-08F1F0764660}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{02B02282-F2A2-4A8E-8F31-08F1F0764660}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{02B02282-F2A2-4A8E-8F31-08F1F0764660}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E98D92FD-1D7C-4397-A441-211041DE8ADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E98D92FD-1D7C-4397-A441-211041DE8ADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E98D92FD-1D7C-4397-A441-211041DE8ADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E98D92FD-1D7C-4397-A441-211041DE8ADD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
