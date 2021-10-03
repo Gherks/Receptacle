@@ -12,3 +12,14 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+/*This is modifying the btn-primary colors but you could create your own .btn-something class as well*/
+.btn-table-action {
+    background-color: rgb(208 208 208 / 0.0);
+    border-color: rgb(208 208 208 / 0.0); /*set the color you want here*/
+}
+
+.btn-table-action:hover, .btn-table-action:focus, .btn-table-action:active, .btn-table-action.active, .open > .dropdown-toggle.btn-table-action {
+    background-color: rgb(208 208 208);
+    border-color: rgb(208 208 208); /*set the color you want here*/
+}

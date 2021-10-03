@@ -28,10 +28,10 @@ export default function IngredientsTable(props: { ingredients: Ingredient[] }) {
                                 <td>{ingredient.protein}</td>
                                 <td>{ingredient.calories}</td>
                                 <td>
-                                    <button className="btn">
+                                    <button className="btn btn-table-action">
                                         <FontAwesomeIcon icon={faEdit} />
                                     </button>
-                                    <button className="btn">
+                                    <button className="btn btn-table-action">
                                         <FontAwesomeIcon icon={faTrashAlt} />
                                     </button>
                                 </td>
