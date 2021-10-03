@@ -85,16 +85,16 @@ namespace Receptacle.Server.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Type entity)
+        public async Task<bool> DeleteAsync(Type entity)
         {
             _dbContext.Set<Type>().Remove(entity);
-            await _dbContext.SaveChangesAsync();
+            return await _dbContext.SaveChangesAsync() == 1;
         }
 
-        public async Task DeleteManyAsync(IEnumerable<Type> entities)
+        public async Task<bool> DeleteManyAsync(IEnumerable<Type> entities)
         {
             _dbContext.Set<Type>().RemoveRange(entities);
-            await _dbContext.SaveChangesAsync();
+            return await _dbContext.SaveChangesAsync() == entities.Count();
         }
     }
 }

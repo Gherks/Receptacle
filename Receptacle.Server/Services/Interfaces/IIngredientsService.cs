@@ -11,6 +11,6 @@ namespace Receptacle.Server.Services.Interfaces
         Task<IngredientDto> GetByIdAsync(Guid id);
         Task<IReadOnlyList<IngredientDto>> GetAllAsync();
         Task<IngredientDto> SaveAsync(IngredientDto ingredientDto);
-        Task DeleteAsync(Guid id);
+        Task<bool> DeleteAsync(Guid id);
     }
 }

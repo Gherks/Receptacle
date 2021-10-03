@@ -56,14 +56,16 @@ namespace Receptacle.Server.Services
             return _mapper.Map<IngredientDto>(ingredient);
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
             var entity = await _repository.GetByIdAsync(id);
 
             if (entity != null)
             {
-                await _repository.DeleteAsync(entity);
+                return await _repository.DeleteAsync(entity);
             }
+
+            return false;
         }
     }
 }

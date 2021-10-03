@@ -70,5 +70,20 @@ namespace Receptacle.Server.Controllers
                 return BadRequest(exception.Message);
             }
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            //HttpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
+
+            bool ingredientRemoved = await _service.DeleteAsync(id);
+
+            if (ingredientRemoved)
+            {
+                return NoContent();
+            }
+
+            return BadRequest($"Failed to delelete entity with id: {id}");
+        }
     }
 }

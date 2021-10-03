@@ -13,7 +13,7 @@ namespace Receptacle.Server.Repositories.Interfaces
         Task<IEnumerable<Type>> AddManyAsync(IEnumerable<Type> entities);
         Task<Type> UpdateAsync(Type entity);
         Task UpdateManyAsync(IEnumerable<Type> entities);
-        Task DeleteAsync(Type entity);
-        Task DeleteManyAsync(IEnumerable<Type> entities);
+        Task<bool> DeleteAsync(Type entity);
+        Task<bool> DeleteManyAsync(IEnumerable<Type> entities);
     }
 }
