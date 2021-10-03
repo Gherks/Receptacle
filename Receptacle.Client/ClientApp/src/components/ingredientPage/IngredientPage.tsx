@@ -55,7 +55,7 @@ export default function Ingredients() {
 
     useEffect(() => {
         getIngredients().then(_ingredients => setIngredients(_ingredients));
-    }, []);
+    }, [ingredients]);
 
     return (
         <>

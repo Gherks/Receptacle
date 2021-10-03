@@ -1,12 +1,41 @@
-import React from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 import Ingredient from '../../dto/Ingredient';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons'
+import ConfirmationModal from './../common/ConfirmationModal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { deleteIngredient } from '../../api/ingredientApi';
 
 export default function IngredientsTable(props: { ingredients: Ingredient[] }) {
+    const [rowTargetId, setRowTargetId] = useState<string>("");
+    const [rowTargetName, setRowTargetName] = useState<string>("");
+    
+    function handleIngredientRemoval(event: SyntheticEvent) {
+        event.preventDefault();
+        deleteIngredient(rowTargetId);
+    }
+
+    function handleModalOpen(event: React.MouseEvent<HTMLElement>) {
+        event.preventDefault();
+        const currentTarget = event.currentTarget as HTMLElement;
+        if (currentTarget.parentNode) {
+            if (currentTarget.parentNode.parentElement) {
+                let rowId = currentTarget.parentNode.parentElement.id;
+                setRowTargetId(rowId);
+
+                let name = currentTarget.parentNode.parentElement.children[0].innerHTML;
+                setRowTargetName(name);
+            }
+        }
+    }
+
     return (
         <>
+            <ConfirmationModal
+                id="ingredient_removal"
+                title="Ingredient removal"
+                content={"Delete <strong>" + rowTargetName + "</strong> from ingredient table?"}
+                onConfirmationClicked={handleIngredientRemoval}
+            />
             <table className="table table-hover table-striped table-sm">
                 <thead>
                     <tr>
@@ -21,7 +50,7 @@ export default function IngredientsTable(props: { ingredients: Ingredient[] }) {
                 <tbody>
                     {props.ingredients.map(ingredient => {
                         return (
-                            <tr key={ingredient.id}>
+                            <tr id={ingredient.id} key={ingredient.id}>
                                 <td>{ingredient.name}</td>
                                 <td>{ingredient.fat}</td>
                                 <td>{ingredient.carbohydrates}</td>
@@ -31,7 +60,7 @@ export default function IngredientsTable(props: { ingredients: Ingredient[] }) {
                                     <button className="btn btn-table-action">
                                         <FontAwesomeIcon icon={faEdit} />
                                     </button>
-                                    <button className="btn btn-table-action">
+                                    <button className="btn btn-table-action" onClick={handleModalOpen} data-bs-toggle="modal" data-bs-target="#ingredient_removal">
                                         <FontAwesomeIcon icon={faTrashAlt} />
                                     </button>
                                 </td>
