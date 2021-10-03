@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { useState, SyntheticEvent, MouseEvent } from 'react';
 import Ingredient from '../../dto/Ingredient';
 import ConfirmationModal from './../common/ConfirmationModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,7 +14,7 @@ export default function IngredientsTable(props: { ingredients: Ingredient[] }) {
         deleteIngredient(rowTargetId);
     }
 
-    function handleModalOpen(event: React.MouseEvent<HTMLElement>) {
+    function handleModalOpen(event: MouseEvent<HTMLElement>) {
         event.preventDefault();
         const currentTarget = event.currentTarget as HTMLElement;
         if (currentTarget.parentNode) {
