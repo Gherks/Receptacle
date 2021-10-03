@@ -11,7 +11,7 @@ function IngredientsForm(props: {
     errors: IngredientErrorForm
 }) {
     return (
-        <form className="mb-3" onSubmit={props.onSubmit}>
+        <form onSubmit={props.onSubmit}>
             <div className="mb-2">
                 <TextInput
                     inputForm={{

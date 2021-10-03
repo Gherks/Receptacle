@@ -1,4 +1,4 @@
-import React, { useState, useEffect, SyntheticEvent } from 'react';
+import React, { useState, useEffect, SyntheticEvent, MouseEvent } from 'react';
 import IngredientsForm from './IngredientsForm';
 import IngredientsTable from './IngredientsTable';
 import Ingredient from '../../dto/Ingredient';
@@ -9,6 +9,7 @@ export default function Ingredients() {
     const [ingredientForm, setIngredientForm] = useState<Ingredient>(new Ingredient());
     const [ingredients, setIngredients] = useState<Ingredient[]>([]);
     const [errors, setErrors] = useState<IngredientErrorForm>(new IngredientErrorForm());
+    const [toggleButtonText, setToggleButtonText] = useState<string>("Show ingredient form");
 
     function handleChange(event: SyntheticEvent) {
         const target = event.target as HTMLInputElement;
@@ -57,11 +58,30 @@ export default function Ingredients() {
         getIngredients().then(_ingredients => setIngredients(_ingredients));
     }, [ingredients]);
 
+    function handleCollapseIngredientFormClick(event: MouseEvent<HTMLElement>) {
+        if (event.currentTarget.innerText === "Show ingredient form") {
+            setToggleButtonText("Hide ingredient form");
+        } else {
+            setToggleButtonText("Show ingredient form");
+        }
+    }
+
     return (
         <>
             <h1>Ingredients</h1>
-            <IngredientsForm ingredientForm={ingredientForm} onChange={handleChange} onSubmit={handleSubmit} errors={errors} />
-            <IngredientsTable ingredients={ingredients} />
+            <div className="card card-body mb-2">
+                <div>
+                    <button className="btn btn-primary" type="button" onClick={handleCollapseIngredientFormClick} data-bs-toggle="collapse" data-bs-target="#collapseIngredientForm" aria-expanded="false" aria-controls="collapseIngredientForm">
+                        {toggleButtonText}
+                    </button>
+                </div>
+                <div className="collapse mt-3" id="collapseIngredientForm">
+                    <IngredientsForm ingredientForm={ingredientForm} onChange={handleChange} onSubmit={handleSubmit} errors={errors} />
+                </div>
+            </div>
+            <div className="card card-body mb-2">
+                <IngredientsTable ingredients={ingredients} />
+            </div>
         </>
     );
 };
