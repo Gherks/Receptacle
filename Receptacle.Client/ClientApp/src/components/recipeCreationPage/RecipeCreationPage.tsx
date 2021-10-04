@@ -1,6 +1,7 @@
 import React, { SyntheticEvent, useState } from 'react';
 import TextInput from './../common/TextInput';
 import NumberInput from './../common/NumberInput';
+import InstructionsInput from './InstructionsInput';
 import RecipeCreationErrorForm from './RecipeCreationErrorForm';
 import Recipe from './../../dto/Recipe';
 
@@ -62,24 +63,7 @@ export default function RecipeCreationPage() {
                             error={errors.basePortions}
                         />
                     </div>
-                    <div className="mb-2">
-                        <div className="form-floating">
-                            <textarea
-                                id="instructionTextArea"
-                                name="instructionTextArea"
-                                className="form-control"
-                                value={recipeForm.instructions}
-                                onChange={handleChange}
-                                placeholder="Enter instructions here"
-                                aria-label="instructionTextArea"
-                                style={{ height: "200px" }}>
-                            </textarea>
-                            <label htmlFor="instructionTextArea">Instructions</label>
-                            <p>
-                                <a className="link-primary" href="https://www.markdownguide.org/cheat-sheet/">Markdown Cheat Sheet</a>
-                            </p>
-                        </div>
-                    </div>
+                    <InstructionsInput instructions={recipeForm.instructions} onChange={handleChange} />
                     <button className="btn btn-primary" type="submit">Add recipe</button>
                 </form >
             </div>
