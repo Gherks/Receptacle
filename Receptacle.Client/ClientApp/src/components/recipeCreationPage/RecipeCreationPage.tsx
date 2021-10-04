@@ -63,7 +63,10 @@ export default function RecipeCreationPage() {
                             error={errors.basePortions}
                         />
                     </div>
-                    <InstructionsInput instructions={recipeForm.instructions} onChange={handleChange} />
+                    <InstructionsInput
+                        instructions={recipeForm.instructions}
+                        onChange={handleChange}
+                    />
                     <button className="btn btn-primary" type="submit">Add recipe</button>
                 </form >
             </div>
