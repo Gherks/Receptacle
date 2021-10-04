@@ -4,9 +4,9 @@ using Receptacle.Server.Repositories.Interfaces;
 
 namespace Receptacle.Server.Repositories
 {
-    public class IngredientsRepository : RepositoryBase<Ingredient>, IIngredientsRepository
+    public class RecipesRepository : RepositoryBase<Recipe>, IRecipesRepository
     {
-        public IngredientsRepository(ReceptacleContext dbContext) : base(dbContext)
+        public RecipesRepository(ReceptacleContext dbContext) : base(dbContext)
         {
         }
     }
