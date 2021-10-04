@@ -19,7 +19,7 @@ export default function InstructionsInput(props: { instructions: string, onChang
             <div className="mb-2">
                 <div className="card card-body">
                     <ReactMarkdown>
-                        {props.instructions ? props.instructions : "Markdown result will end up here"}
+                        {props.instructions ? props.instructions : "Markdown text based upon instructions entered above will end up here"}
                     </ReactMarkdown>
                 </div>
             </div>
