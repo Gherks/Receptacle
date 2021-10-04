@@ -1,5 +1,5 @@
-﻿using Receptacle.Server.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Receptacle.Server.Entities;
 
 namespace Receptacle.Server.Context
 {

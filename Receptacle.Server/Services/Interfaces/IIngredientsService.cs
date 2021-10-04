@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Receptacle.Shared.Dto;
+﻿using Receptacle.Shared.Dto;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

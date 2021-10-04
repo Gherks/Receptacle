@@ -1,11 +1,11 @@
-﻿using Receptacle.Server.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Receptacle.Server.Context;
 using Receptacle.Server.Repositories;
 using Receptacle.Server.Repositories.Interfaces;
 using Receptacle.Server.Services;
 using Receptacle.Server.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Receptacle.Server.Extensions
 {

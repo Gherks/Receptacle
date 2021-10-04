@@ -1,7 +1,7 @@
-﻿using Receptacle.Server.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using Receptacle.Server.Context;
 using Receptacle.Server.Entities.Base;
 using Receptacle.Server.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
