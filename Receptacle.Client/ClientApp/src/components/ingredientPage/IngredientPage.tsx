@@ -5,7 +5,7 @@ import Ingredient from '../../dto/Ingredient';
 import IngredientErrorForm from './IngredientErrorForm';
 import { getIngredients, saveIngredient } from '../../api/ingredientApi';
 
-export default function Ingredients() {
+export default function IngredientsPage() {
     const [ingredientForm, setIngredientForm] = useState<Ingredient>(new Ingredient());
     const [ingredients, setIngredients] = useState<Ingredient[]>([]);
     const [errors, setErrors] = useState<IngredientErrorForm>(new IngredientErrorForm());
