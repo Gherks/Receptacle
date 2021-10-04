@@ -14,7 +14,7 @@ export default function ConfirmationModal(props: {
                         <h5 className="modal-title" id="staticBackdropLabel">{props.title}</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div className="modal-body" dangerouslySetInnerHTML={{ __html: props.content }}/>
+                    <div className="modal-body" dangerouslySetInnerHTML={{ __html: props.content }} />
                     <div className="modal-footer">
                         <button type="button" onClick={props.onConfirmationClicked} data-bs-dismiss="modal" className="btn btn-primary">Yes</button>
                         <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancel</button>

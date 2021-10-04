@@ -1,7 +1,7 @@
 import React from 'react';
 import TextInputForm from './TextInputForm';
 
-export default function TextInput(props: { inputForm: TextInputForm, error: string}) {
+export default function TextInput(props: { inputForm: TextInputForm, error: string }) {
     let wrapperClass = "form-group";
     if (props.error && props.error.length > 0) {
         wrapperClass += " has-error";
