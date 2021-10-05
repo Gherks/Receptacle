@@ -1,9 +1,10 @@
-import React, { useState, useEffect, SyntheticEvent, MouseEvent } from 'react';
-import IngredientsForm from './IngredientsForm';
-import IngredientsTable from './IngredientsTable';
-import Ingredient from '../../dto/Ingredient';
-import IngredientErrorForm from './IngredientErrorForm';
-import { getIngredients, saveIngredient } from '../../api/ingredientApi';
+import React, { useState, useEffect, SyntheticEvent, MouseEvent } from "react";
+import IngredientsForm from "./IngredientsForm";
+import IngredientsTable from "./IngredientsTable";
+import Ingredient from "../../dto/Ingredient";
+import IngredientErrorForm from "./IngredientErrorForm";
+import { getIngredients, saveIngredient } from "../../api/ingredientApi";
+import { toast } from "react-toastify";
 
 export default function IngredientsPage() {
     const [ingredientForm, setIngredientForm] = useState<Ingredient>(new Ingredient());
@@ -26,6 +27,7 @@ export default function IngredientsPage() {
                 let newIngredientsArray = ingredients.slice();
                 newIngredientsArray.push(savedIngredient);
                 setIngredients(newIngredientsArray);
+                toast.success(savedIngredient.name + " saved to ingredient table!");
             });
     }
 
@@ -51,7 +53,7 @@ export default function IngredientsPage() {
 
         setErrors(_errors);
 
-        return Object.keys(_errors).length >= 0;
+        return Object.keys(_errors).length > 0;
     }
 
     useEffect(() => {

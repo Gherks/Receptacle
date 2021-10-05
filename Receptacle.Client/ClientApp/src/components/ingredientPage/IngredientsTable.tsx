@@ -4,6 +4,7 @@ import ConfirmationModal from './../common/ConfirmationModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { deleteIngredient } from '../../api/ingredientApi';
+import { toast } from "react-toastify";
 
 export default function IngredientsTable(props: { ingredients: Ingredient[] }) {
     const [rowTargetId, setRowTargetId] = useState<string>("");
@@ -11,7 +12,10 @@ export default function IngredientsTable(props: { ingredients: Ingredient[] }) {
     
     function handleIngredientRemoval(event: SyntheticEvent) {
         event.preventDefault();
-        deleteIngredient(rowTargetId);
+        deleteIngredient(rowTargetId)
+            .then(() => {
+                toast.warn(rowTargetName + " deleted from ingredient table");
+            });
     }
 
     function handleModalOpen(event: MouseEvent<HTMLElement>) {
