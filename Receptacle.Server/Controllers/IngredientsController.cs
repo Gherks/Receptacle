@@ -80,7 +80,7 @@ namespace Receptacle.Server.Controllers
 
             if (ingredientRemoved)
             {
-                return NoContent();
+                return Ok(ingredientRemoved);
             }
 
             return BadRequest($"Failed to delelete entity with id: {id}");
