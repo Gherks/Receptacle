@@ -1,5 +1,12 @@
-import React from 'react';
-import NumberInputForm from './NumberInputForm';
+import React, { ChangeEventHandler } from 'react';
+
+interface NumberInputForm {
+    id: string,
+    name: string,
+    placeholder: string
+    onChange: ChangeEventHandler<HTMLInputElement>,
+    value: number,
+}
 
 export default function NumberInput(props: { inputForm: NumberInputForm, error: string }) {
     let wrapperClass = "form-group";

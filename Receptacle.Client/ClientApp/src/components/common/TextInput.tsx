@@ -1,5 +1,12 @@
-import React from 'react';
-import TextInputForm from './TextInputForm';
+import React, { ChangeEventHandler } from 'react';
+
+interface TextInputForm {
+    id: string,
+    name: string,
+    placeholder: string
+    onChange: ChangeEventHandler<HTMLInputElement>,
+    value: string,
+}
 
 export default function TextInput(props: { inputForm: TextInputForm, error: string }) {
     let wrapperClass = "form-group";
