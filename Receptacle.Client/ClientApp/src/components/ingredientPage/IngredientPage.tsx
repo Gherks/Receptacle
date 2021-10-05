@@ -27,6 +27,7 @@ export default function IngredientsPage() {
                 let newIngredientsArray = ingredients.slice();
                 newIngredientsArray.push(savedIngredient);
                 setIngredients(newIngredientsArray);
+                setIngredientForm(new Ingredient());
                 toast.success(savedIngredient.name + " saved to ingredient table!");
             });
     }
