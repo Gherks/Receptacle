@@ -3,6 +3,7 @@
     public class IngredientDto : DtoBase
     {
         public string Name { get; set; } = "";
+        public IngredientCategoryDto Category { get; set; } = null;
         public decimal Fat { get; set; } = 0;
         public decimal Carbohydrates { get; set; } = 0;
         public decimal Protein { get; set; } = 0;

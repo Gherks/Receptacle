@@ -23,7 +23,7 @@ namespace Receptacle.Server.Repositories
             return await _dbContext.Set<Type>().FindAsync(id);
         }
 
-        public async Task<IReadOnlyList<Type>> ListAllAsync()
+        public virtual async Task<IReadOnlyList<Type>> ListAllAsync()
         {
             return await _dbContext.Set<Type>().ToListAsync();
         }

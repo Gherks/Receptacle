@@ -1,6 +1,9 @@
-﻿using Receptacle.Server.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using Receptacle.Server.Context;
 using Receptacle.Server.Entities;
 using Receptacle.Server.Repositories.Interfaces;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Receptacle.Server.Repositories
 {
@@ -8,6 +11,13 @@ namespace Receptacle.Server.Repositories
     {
         public IngredientsRepository(ReceptacleContext dbContext) : base(dbContext)
         {
+        }
+
+        public override async Task<IReadOnlyList<Ingredient>> ListAllAsync()
+        {
+            return await _dbContext.Set<Ingredient>()
+                .Include(ingredient => ingredient.IngredientCategory)
+                .ToListAsync();
         }
     }
 }
