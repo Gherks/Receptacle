@@ -17,5 +17,6 @@ namespace Receptacle.Server.Context
 
         public DbSet<Recipe> Recipe { get; set; }
         public DbSet<Ingredient> Ingredient { get; set; }
+        public DbSet<IngredientCategory> IngredientCategory { get; set; }
     }
 }
