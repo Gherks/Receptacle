@@ -2,15 +2,37 @@ import React, { useState, useEffect, SyntheticEvent, MouseEvent } from "react";
 import IngredientsForm from "./IngredientsForm";
 import IngredientsTable from "./IngredientsTable";
 import Ingredient from "../../dto/Ingredient";
+import IngredientCategory from "../../dto/IngredientCategory";
 import IngredientErrorForm from "./IngredientErrorForm";
 import { getIngredients, saveIngredient } from "../../api/ingredientApi";
+import { getIngredientCategories } from "../../api/ingredientCategoryApi";
 import { toast } from "react-toastify";
 
 export default function IngredientsPage() {
     const [ingredientForm, setIngredientForm] = useState<Ingredient>(new Ingredient());
-    const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+    const [ingredientCollections, setIngredientCollections] = useState<Ingredient[][]>([]);
+    const [ingredientCategories, setIngredientCategories] = useState<IngredientCategory[]>([]);
     const [errors, setErrors] = useState<IngredientErrorForm>(new IngredientErrorForm());
     const [toggleButtonText, setToggleButtonText] = useState<string>("Show ingredient form");
+
+    useEffect(() => {
+        const _ingredientCollections: Ingredient[][] = [];
+        getIngredientCategories().then(_ingredientCategories => {
+            setIngredientCategories(_ingredientCategories);
+            _ingredientCategories.map(() => {
+                _ingredientCollections.push([]);
+            })
+        });
+        getIngredients().then(_ingredients => {
+            _ingredients.map((ingredient: Ingredient) => {
+                if (ingredient.category) {
+                    const categoryIndex = ingredient.category.sortOrder;
+                    _ingredientCollections[categoryIndex].push(ingredient);
+                }
+            })
+            setIngredientCollections(_ingredientCollections);
+        });
+    }, []);
 
     function handleChange(event: SyntheticEvent) {
         const target = event.target as HTMLInputElement;
@@ -23,12 +45,17 @@ export default function IngredientsPage() {
             return;
         }
         saveIngredient(ingredientForm)
-            .then(savedIngredient => {
-                let newIngredientsArray = ingredients.slice();
-                newIngredientsArray.push(savedIngredient);
-                setIngredients(newIngredientsArray);
-                setIngredientForm(new Ingredient());
-                toast.success(savedIngredient.name + " saved to ingredient table!");
+            .then((savedIngredient: Ingredient) => {
+                if (savedIngredient && savedIngredient.category) {
+                    const index = savedIngredient.category.sortOrder;
+                    const newIngredientsCollection: Ingredient[][] = ingredientCollections.slice();
+                    newIngredientsCollection[index].push(savedIngredient);
+                    setIngredientCollections(newIngredientsCollection);
+                    setIngredientForm(new Ingredient());
+                    toast.success(savedIngredient.name + " saved to ingredient table!");
+                } else {
+                    toast.error("Unable to properly save ingredient to table");
+                }
             });
     }
 
@@ -57,10 +84,6 @@ export default function IngredientsPage() {
         return Object.keys(_errors).length > 0;
     }
 
-    useEffect(() => {
-        getIngredients().then(_ingredients => setIngredients(_ingredients));
-    }, [ingredients]);
-
     function handleCollapseIngredientFormClick(event: MouseEvent<HTMLElement>) {
         if (event.currentTarget.innerText === "Show ingredient form") {
             setToggleButtonText("Hide ingredient form");
@@ -79,12 +102,16 @@ export default function IngredientsPage() {
                     </button>
                 </div>
                 <div className="collapse mt-3" id="collapseIngredientForm">
-                    <IngredientsForm ingredientForm={ingredientForm} onChange={handleChange} onSubmit={handleSubmit} errors={errors} />
+                    <IngredientsForm ingredientForm={ingredientForm} ingredientCategories={ingredientCategories} onChange={handleChange} onSubmit={handleSubmit} errors={errors} />
                 </div>
             </div>
-            <div className="card card-body mb-2">
-                <IngredientsTable ingredients={ingredients} />
-            </div>
+            {ingredientCollections.map((ingredientCollection, index) => {
+                return (
+                    <div className="card card-body mb-2" key={ingredientCategories[index].id}>
+                        <IngredientsTable categoryName={ingredientCategories[index].name} ingredients={ingredientCollection} />
+                    </div>
+                )
+            })}
         </>
     );
 };

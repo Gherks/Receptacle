@@ -6,10 +6,10 @@ import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { deleteIngredient } from '../../api/ingredientApi';
 import { toast } from "react-toastify";
 
-export default function IngredientsTable(props: { ingredients: Ingredient[] }) {
+export default function IngredientsTable(props: { categoryName: string, ingredients: Ingredient[] }) {
     const [rowTargetId, setRowTargetId] = useState<string>("");
     const [rowTargetName, setRowTargetName] = useState<string>("");
-    
+
     function handleIngredientRemoval(event: SyntheticEvent) {
         event.preventDefault();
         deleteIngredient(rowTargetId)
@@ -34,6 +34,9 @@ export default function IngredientsTable(props: { ingredients: Ingredient[] }) {
 
     return (
         <>
+            {props.categoryName && (
+                <h2>{props.categoryName}</h2>
+            )}
             <ConfirmationModal
                 id="ingredient_removal"
                 title="Ingredient removal"
