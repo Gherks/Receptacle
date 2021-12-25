@@ -3,10 +3,13 @@ import Ingredient from '../../dto/Ingredient';
 import TextInput from './../common/TextInput';
 import NumberInput from './../common/NumberInput';
 import IngredientErrorForm from './IngredientErrorForm';
+import IngredientCategory from '../../dto/IngredientCategory';
 
 function IngredientsForm(props: {
     ingredientForm: Ingredient,
+    ingredientCategories: IngredientCategory[],
     onChange: ChangeEventHandler<HTMLInputElement>,
+    onCategorySelectChange: ChangeEventHandler<HTMLSelectElement>,
     onSubmit: FormEventHandler<HTMLFormElement>,
     errors: IngredientErrorForm
 }) {
@@ -71,6 +74,16 @@ function IngredientsForm(props: {
                     }}
                     error={props.errors.calories}
                 />
+            </div>
+            <div className="mb-2">
+                <select className="form-select" onChange={props.onCategorySelectChange}>
+                    <option selected value="">Choose a category...</option>
+                    {props.ingredientCategories.map(ingredientCategory => {
+                        return (
+                            <option value={ingredientCategory.id}>{ingredientCategory.name}</option>
+                        )
+                    })}
+                </select>
             </div>
             <button className="btn btn-primary" type="submit">Add ingredient</button>
         </form >

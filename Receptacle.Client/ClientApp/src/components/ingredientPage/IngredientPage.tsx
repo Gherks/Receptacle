@@ -39,6 +39,14 @@ export default function IngredientsPage() {
         setIngredientForm({ ...ingredientForm, [target.name]: target.value })
     }
 
+    function handleCategorySelectChange(event: SyntheticEvent) {
+        const target = event.target as HTMLSelectElement;
+        const category = ingredientCategories.find(category => category.id === target.value);
+        if (category) {
+            setIngredientForm({ ...ingredientForm, "category": category })
+        }
+    }
+
     function handleSubmit(event: SyntheticEvent) {
         event.preventDefault();
         if (formIsInvalid()) {
@@ -102,7 +110,7 @@ export default function IngredientsPage() {
                     </button>
                 </div>
                 <div className="collapse mt-3" id="collapseIngredientForm">
-                    <IngredientsForm ingredientForm={ingredientForm} ingredientCategories={ingredientCategories} onChange={handleChange} onSubmit={handleSubmit} errors={errors} />
+                    <IngredientsForm ingredientForm={ingredientForm} ingredientCategories={ingredientCategories} onChange={handleChange} onCategorySelectChange={handleCategorySelectChange} onSubmit={handleSubmit} errors={errors} />
                 </div>
             </div>
             {ingredientCollections.map((ingredientCollection, index) => {
