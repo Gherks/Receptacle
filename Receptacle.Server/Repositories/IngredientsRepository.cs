@@ -15,9 +15,7 @@ namespace Receptacle.Server.Repositories
 
         public override async Task<IReadOnlyList<Ingredient>> ListAllAsync()
         {
-            return await _dbContext.Set<Ingredient>()
-                .Include(ingredient => ingredient.IngredientCategory)
-                .ToListAsync();
+            return await _dbContext.Set<Ingredient>().ToListAsync();
         }
     }
 }

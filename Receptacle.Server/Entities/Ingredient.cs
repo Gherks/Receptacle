@@ -1,14 +1,15 @@
 ﻿using Receptacle.Server.Entities.Base;
 using Receptacle.Shared;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Receptacle.Server.Entities
 {
     public class Ingredient : BaseEntity
     {
-        public string Name { get; set; }
+        public Guid IngredientCategoryId { get; set; }
 
-        public IngredientCategory IngredientCategory { get; set; }
+        public string Name { get; set; }
 
         [Column(TypeName = "decimal(18,6)")]
         public decimal Fat { get; set; }
