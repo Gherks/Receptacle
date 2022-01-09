@@ -5,7 +5,7 @@ namespace Receptacle.Shared.Dto
 {
     public class IngredientDto : DtoBase
     {
-        public Guid IngredientCategoryId { get; set; } = Guid.Empty;
+        public IngredientCategoryDto Category { get; set; } = null;
         public string Name { get; set; } = "";
         public decimal Fat { get; set; } = 0;
         public decimal Carbohydrates { get; set; } = 0;

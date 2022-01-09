@@ -8,7 +8,10 @@ namespace Receptacle.Server.AutoMapperProfiles
     {
         public IngredientProfile()
         {
-            CreateMap<Ingredient, IngredientDto>().ReverseMap();
+            CreateMap<Ingredient, IngredientDto>();
+            CreateMap<IngredientDto, Ingredient>()
+                .ForMember(ingredient => ingredient.IngredientCategoryId,
+                    options => options.MapFrom(ingredientDto => ingredientDto.Category.Id));
         }
     }
 }

@@ -13,11 +13,13 @@ namespace Receptacle.Server.Services
     public class IngredientsService : IIngredientsService
     {
         private readonly IIngredientsRepository _repository;
+        private readonly IIngredientCategoryService _ingredientCategoryService;
         private readonly IMapper _mapper;
 
-        public IngredientsService(IIngredientsRepository repository, IMapper mapper)
+        public IngredientsService(IIngredientsRepository repository, IIngredientCategoryService ingredientCategoryService, IMapper mapper)
         {
             _repository = repository;
+            _ingredientCategoryService = ingredientCategoryService;
             _mapper = mapper;
         }
 
@@ -27,7 +29,12 @@ namespace Receptacle.Server.Services
 
             if (ingredient != null)
             {
-                return _mapper.Map<IngredientDto>(ingredient);
+                IReadOnlyList<IngredientCategoryDto> ingredientCategoryDtos = await _ingredientCategoryService.GetAllAsync();
+
+                IngredientDto ingredientDto = _mapper.Map<IngredientDto>(ingredient);
+                ingredientDto.Category = ingredientCategoryDtos.FirstOrDefault(ingredientCategory => ingredientCategory.Id == ingredient.IngredientCategoryId);
+
+                return ingredientDto;
             }
 
             return null;
@@ -36,8 +43,19 @@ namespace Receptacle.Server.Services
         public async Task<IReadOnlyList<IngredientDto>> GetAllAsync()
         {
             IReadOnlyList<Ingredient> ingredients = await _repository.ListAllAsync();
+            IReadOnlyList<IngredientCategoryDto> ingredientCategoryDtos = await _ingredientCategoryService.GetAllAsync();
 
-            return entities.Select(ingredient => _mapper.Map<IngredientDto>(ingredient)).ToArray();
+            List<IngredientDto> ingredientDtos = new();
+
+            foreach (Ingredient ingredient in ingredients)
+            {
+                IngredientDto ingredientDto = _mapper.Map<IngredientDto>(ingredient);
+                ingredientDto.Category = ingredientCategoryDtos.FirstOrDefault(ingredientCategory => ingredientCategory.Id == ingredient.IngredientCategoryId);
+
+                ingredientDtos.Add(ingredientDto);
+            }
+
+            return ingredientDtos;
         }
 
         public async Task<IngredientDto> SaveAsync(IngredientDto ingredientDto)
@@ -50,10 +68,15 @@ namespace Receptacle.Server.Services
             }
             else
             {
-                await _repository.UpdateAsync(ingredient);
+                ingredient = await _repository.UpdateAsync(ingredient);
             }
 
-            return _mapper.Map<IngredientDto>(ingredient);
+            IReadOnlyList<IngredientCategoryDto> ingredientCategoryDtos = await _ingredientCategoryService.GetAllAsync();
+
+            IngredientDto savedIngredientDto = _mapper.Map<IngredientDto>(ingredient);
+            savedIngredientDto.Category = ingredientCategoryDtos.FirstOrDefault(ingredientCategory => ingredientCategory.Id == ingredient.IngredientCategoryId);
+
+            return savedIngredientDto;
         }
 
         public async Task<bool> DeleteAsync(Guid id)
