@@ -35,13 +35,13 @@ export default function IngredientsPage() {
     }, []);
 
     function handleChange(event: SyntheticEvent) {
-        const target = event.target as HTMLInputElement;
+        const target: HTMLInputElement = event.target as HTMLInputElement;
         setIngredientForm({ ...ingredientForm, [target.name]: target.value })
     }
 
     function handleCategorySelectChange(event: SyntheticEvent) {
-        const target = event.target as HTMLSelectElement;
-        const category = ingredientCategories.find(category => category.id === target.value);
+        const target: HTMLSelectElement = event.target as HTMLSelectElement;
+        const category: IngredientCategory | undefined = ingredientCategories.find(category => category.id === target.value);
         if (category) {
             setIngredientForm({ ...ingredientForm, "category": category })
         }
@@ -55,7 +55,7 @@ export default function IngredientsPage() {
         saveIngredient(ingredientForm)
             .then((savedIngredient: Ingredient) => {
                 if (savedIngredient && savedIngredient.category) {
-                    const index = savedIngredient.category.sortOrder;
+                    const index: number = savedIngredient.category.sortOrder;
                     const newIngredientsCollection: Ingredient[][] = ingredientCollections.slice();
                     newIngredientsCollection[index].push(savedIngredient);
                     setIngredientCollections(newIngredientsCollection);
