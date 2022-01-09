@@ -35,7 +35,7 @@ namespace Receptacle.Server.Services
 
         public async Task<IReadOnlyList<RecipeDto>> GetAllAsync()
         {
-            var entities = await _repository.ListAllAsync();
+            IReadOnlyList<Recipe> entities = await _repository.ListAllAsync();
 
             return entities.Select(recipe => _mapper.Map<RecipeDto>(recipe)).ToArray();
         }
@@ -58,11 +58,11 @@ namespace Receptacle.Server.Services
 
         public async Task<bool> DeleteAsync(Guid id)
         {
-            var entity = await _repository.GetByIdAsync(id);
+            Recipe recipe = await _repository.GetByIdAsync(id);
 
-            if (entity != null)
+            if (recipe != null)
             {
-                return await _repository.DeleteAsync(entity);
+                return await _repository.DeleteAsync(recipe);
             }
 
             return false;

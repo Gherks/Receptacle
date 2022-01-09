@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Receptacle.Server.Entities;
 using Receptacle.Server.Repositories.Interfaces;
 using Receptacle.Server.Services.Interfaces;
@@ -35,7 +35,7 @@ namespace Receptacle.Server.Services
 
         public async Task<IReadOnlyList<IngredientDto>> GetAllAsync()
         {
-            var entities = await _repository.ListAllAsync();
+            IReadOnlyList<Ingredient> ingredients = await _repository.ListAllAsync();
 
             return entities.Select(ingredient => _mapper.Map<IngredientDto>(ingredient)).ToArray();
         }
@@ -58,11 +58,11 @@ namespace Receptacle.Server.Services
 
         public async Task<bool> DeleteAsync(Guid id)
         {
-            var entity = await _repository.GetByIdAsync(id);
+            Ingredient ingredient = await _repository.GetByIdAsync(id);
 
-            if (entity != null)
+            if (ingredient != null)
             {
-                return await _repository.DeleteAsync(entity);
+                return await _repository.DeleteAsync(ingredient);
             }
 
             return false;

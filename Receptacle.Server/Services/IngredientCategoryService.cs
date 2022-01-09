@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Receptacle.Server.Entities;
 using Receptacle.Server.Repositories.Interfaces;
 using Receptacle.Server.Services.Interfaces;
 using Receptacle.Shared.Dto;
@@ -21,7 +22,7 @@ namespace Receptacle.Server.Services
 
         public async Task<IReadOnlyList<IngredientCategoryDto>> GetAllAsync()
         {
-            var entities = await _repository.ListAllAsync();
+            IReadOnlyList<IngredientCategory> entities = await _repository.ListAllAsync();
 
             List<IngredientCategoryDto> ingredientCategoryDtos = entities.Select(ingredientCategory => _mapper.Map<IngredientCategoryDto>(ingredientCategory)).ToList();
 
