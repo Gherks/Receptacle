@@ -26,7 +26,7 @@ export default function IngredientsPage() {
         getIngredients().then(_ingredients => {
             _ingredients.map((ingredient: Ingredient) => {
                 if (ingredient.category) {
-                    const categoryIndex = ingredient.category.sortOrder;
+                    const categoryIndex: number = ingredient.category.sortOrder;
                     _ingredientCollections[categoryIndex].push(ingredient);
                 }
             })

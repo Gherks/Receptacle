@@ -20,7 +20,7 @@ export default function IngredientsTable(props: { categoryName: string, ingredie
 
     function handleModalOpen(event: MouseEvent<HTMLElement>) {
         event.preventDefault();
-        const currentTarget = event.currentTarget as HTMLElement;
+        const currentTarget: HTMLElement = event.currentTarget as HTMLElement;
         if (currentTarget.parentNode) {
             if (currentTarget.parentNode.parentElement) {
                 let rowId = currentTarget.parentNode.parentElement.id;

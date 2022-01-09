@@ -10,7 +10,7 @@ export default function RecipeCreationPage() {
     const [errors, setErrors] = useState<RecipeCreationErrorForm>(new RecipeCreationErrorForm());
 
     function handleChange(event: SyntheticEvent) {
-        const target = event.target as HTMLInputElement;
+        const target: HTMLInputElement = event.target as HTMLInputElement;
         setRecipeForm({ ...recipeForm, [target.name]: target.value })
     }
 
