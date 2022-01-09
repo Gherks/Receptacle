@@ -1,5 +1,4 @@
 ﻿using Receptacle.Shared.Dto.Base;
-using System;
 
 namespace Receptacle.Shared.Dto
 {

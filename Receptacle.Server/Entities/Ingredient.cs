@@ -1,5 +1,4 @@
 ﻿using Receptacle.Server.Entities.Base;
-using Receptacle.Shared;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
