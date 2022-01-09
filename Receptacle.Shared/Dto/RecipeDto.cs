@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Receptacle.Shared.Dto.Base;
+using System.Collections.Generic;
 
 namespace Receptacle.Shared.Dto
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Receptacle.Shared.Dto
+namespace Receptacle.Shared.Dto.Base
 {
     public class DtoBase
     {

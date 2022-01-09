@@ -1,4 +1,6 @@
-﻿namespace Receptacle.Shared.Dto
+﻿using Receptacle.Shared.Dto.Base;
+
+namespace Receptacle.Shared.Dto
 {
     public class IngredientCategoryDto : DtoBase
     {
