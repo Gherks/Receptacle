@@ -14,7 +14,7 @@ export default function IngredientsTable(props: { categoryName: string, ingredie
         event.preventDefault();
         deleteIngredient(rowTargetId)
             .then(() => {
-                toast.warn(rowTargetName + " deleted from ingredient table");
+                toast.info(rowTargetName + " deleted from ingredient table");
             });
     }
 
