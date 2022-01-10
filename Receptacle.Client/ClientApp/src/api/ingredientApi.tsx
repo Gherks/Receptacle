@@ -3,7 +3,7 @@ import Ingredient from "./../dto/Ingredient";
 
 const baseUrl = "api/ingredients/";
 
-export function getIngredients() {
+export function getIngredients(): Promise<any> {
     return fetch(baseUrl)
         .then(handleResponse)
         .catch(handleError);
@@ -21,7 +21,7 @@ export function getIngredients() {
 //        .catch(handleError);
 //}
 
-export function saveIngredient(ingredient: Ingredient) {
+export function saveIngredient(ingredient: Ingredient): Promise<any> {
     const { id, ...idlessIngredient } = ingredient;
     const url: string = baseUrl + (ingredient.id || "");
     const requestOptions = {
@@ -34,7 +34,7 @@ export function saveIngredient(ingredient: Ingredient) {
         .catch(handleError);
 }
 
-export function deleteIngredient(ingredientId: string) {
+export function deleteIngredient(ingredientId: string): Promise<any> {
     return fetch(baseUrl + ingredientId, { method: "DELETE" })
         .then(handleResponse)
         .catch(handleError);

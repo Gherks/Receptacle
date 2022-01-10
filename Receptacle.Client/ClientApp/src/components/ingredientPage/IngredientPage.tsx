@@ -37,12 +37,12 @@ export default function IngredientsPage() {
         });
     }, []);
 
-    function handleChange(event: SyntheticEvent) {
+    function handleChange(event: SyntheticEvent): void {
         const target: HTMLInputElement = event.target as HTMLInputElement;
         setIngredientForm({ ...ingredientForm, [target.name]: target.value })
     }
 
-    function handleCategorySelectChange(event: SyntheticEvent) {
+    function handleCategorySelectChange(event: SyntheticEvent): void {
         const target: HTMLSelectElement = event.target as HTMLSelectElement;
         const category: IngredientCategory | undefined = ingredientCategories.find(category => category.id === target.value);
         if (category) {
@@ -50,7 +50,7 @@ export default function IngredientsPage() {
         }
     }
 
-    function handleSubmit(event: SyntheticEvent) {
+    function handleSubmit(event: SyntheticEvent): void {
         event.preventDefault();
         if (formIsInvalid()) {
             return;
@@ -70,7 +70,7 @@ export default function IngredientsPage() {
             });
     }
 
-    function onIngredientRemovalModalOpen(event: MouseEvent<HTMLElement>) {
+    function onIngredientRemovalModalOpen(event: MouseEvent<HTMLElement>): void {
         event.preventDefault();
         const currentTarget: HTMLElement = event.currentTarget as HTMLElement;
         if (currentTarget.parentNode) {
@@ -84,7 +84,7 @@ export default function IngredientsPage() {
         }
     }
 
-    function handleIngredientRemoval(event: SyntheticEvent) {
+    function handleIngredientRemoval(event: SyntheticEvent): void {
         event.preventDefault();
         deleteIngredient(rowTargetId)
             .then(() => {
@@ -92,7 +92,7 @@ export default function IngredientsPage() {
             });
     }
 
-    function formIsInvalid() {
+    function formIsInvalid(): boolean {
         let _errors: any = {};
 
         if (!ingredientForm.name) _errors.name = "Name is required";
@@ -117,7 +117,7 @@ export default function IngredientsPage() {
         return Object.keys(_errors).length > 0;
     }
 
-    function handleCollapseIngredientFormClick(event: MouseEvent<HTMLElement>) {
+    function handleCollapseIngredientFormClick(event: MouseEvent<HTMLElement>): void {
         if (event.currentTarget.innerText === "Show ingredient form") {
             setToggleButtonText("Hide ingredient form");
         } else {

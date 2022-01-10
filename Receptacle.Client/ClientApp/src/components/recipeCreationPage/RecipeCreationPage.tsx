@@ -9,19 +9,19 @@ export default function RecipeCreationPage() {
     const [recipeForm, setRecipeForm] = useState<Recipe>(new Recipe());
     const [errors, setErrors] = useState<RecipeCreationErrorForm>(new RecipeCreationErrorForm());
 
-    function handleChange(event: SyntheticEvent) {
+    function handleChange(event: SyntheticEvent): void {
         const target: HTMLInputElement = event.target as HTMLInputElement;
         setRecipeForm({ ...recipeForm, [target.name]: target.value })
     }
 
-    function handleSubmit(event: SyntheticEvent) {
+    function handleSubmit(event: SyntheticEvent): void {
         event.preventDefault();
         if (formIsInvalid()) {
             return;
         }
     }
 
-    function formIsInvalid() {
+    function formIsInvalid(): boolean {
         let _errors: any = {};
 
         if (!recipeForm.name) _errors.name = "Name is required";

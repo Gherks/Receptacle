@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-export async function handleResponse(response: Response) {
+export async function handleResponse(response: Response): Promise<any> {
     if (response.ok) {
         return response.json();
     }
@@ -13,7 +13,7 @@ export async function handleResponse(response: Response) {
     throw new Error("Network response was not ok.");
 }
 
-export function handleError(error: string) {
+export function handleError(error: string): void {
     console.error("API call failed. " + error);
     toast.error("API call failed. " + error, {autoClose: 10000});
     throw error;
