@@ -1,5 +1,5 @@
 import React, { useState, MouseEvent, MouseEventHandler } from 'react';
-import Ingredient from '../../dto/Ingredient';
+import Ingredient from '../../../dto/Ingredient';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 

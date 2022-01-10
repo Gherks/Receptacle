@@ -1,8 +1,8 @@
 import React, { SyntheticEvent, useState } from 'react';
 import TextInput from './../common/TextInput';
 import NumberInput from './../common/NumberInput';
-import InstructionsInput from './InstructionsInput';
-import RecipeCreationErrorForm from './RecipeCreationErrorForm';
+import InstructionsInput from './components/InstructionsInput';
+import RecipeCreationErrorForm from './components/RecipeCreationErrorForm';
 import Recipe from './../../dto/Recipe';
 
 export default function RecipeCreationPage() {

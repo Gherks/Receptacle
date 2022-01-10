@@ -1,9 +1,9 @@
 import React, { ChangeEventHandler, FormEventHandler } from 'react';
-import Ingredient from '../../dto/Ingredient';
-import TextInput from './../common/TextInput';
-import NumberInput from './../common/NumberInput';
+import Ingredient from '../../../dto/Ingredient';
+import TextInput from './../../common/TextInput';
+import NumberInput from './../../common/NumberInput';
 import IngredientErrorForm from './IngredientErrorForm';
-import IngredientCategory from '../../dto/IngredientCategory';
+import IngredientCategory from '../../../dto/IngredientCategory';
 
 function IngredientsForm(props: {
     ingredientForm: Ingredient,

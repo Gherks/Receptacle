@@ -1,9 +1,9 @@
 import React, { useState, useEffect, SyntheticEvent, MouseEvent } from "react";
-import IngredientsForm from "./IngredientsForm";
-import IngredientsTable from "./IngredientsTable";
+import IngredientsForm from "./components/IngredientsForm";
+import IngredientsTable from "./components/IngredientsTable";
 import Ingredient from "../../dto/Ingredient";
 import IngredientCategory from "../../dto/IngredientCategory";
-import IngredientErrorForm from "./IngredientErrorForm";
+import IngredientErrorForm from "./components/IngredientErrorForm";
 import { deleteIngredient, getIngredients, saveIngredient } from "../../api/ingredientApi";
 import { getIngredientCategories } from "../../api/ingredientCategoryApi";
 import { toast } from "react-toastify";
