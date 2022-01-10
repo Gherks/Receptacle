@@ -58,10 +58,7 @@ export default function IngredientsPage() {
         saveIngredient(ingredientForm)
             .then((savedIngredient: Ingredient) => {
                 if (savedIngredient && savedIngredient.category) {
-                    const index: number = savedIngredient.category.sortOrder;
-                    const newIngredientsCollection: Ingredient[][] = ingredientCollections.slice();
-                    newIngredientsCollection[index].push(savedIngredient);
-                    setIngredientCollections(newIngredientsCollection);
+                    addIngredientToIngredientCollection(savedIngredient);
                     setIngredientForm(new Ingredient());
                     toast.success(savedIngredient.name + " saved to ingredient table!");
                 } else {
@@ -90,6 +87,15 @@ export default function IngredientsPage() {
             .then(() => {
                 toast.info(rowTargetName + " deleted from ingredient table");
             });
+    }
+
+    function addIngredientToIngredientCollection(ingredient: Ingredient): void {
+        if (ingredient && ingredient.category) {
+            const index: number = ingredient.category.sortOrder;
+            const newIngredientsCollection: Ingredient[][] = ingredientCollections.slice();
+            newIngredientsCollection[index].push(ingredient);
+            setIngredientCollections(newIngredientsCollection);
+        }
     }
 
     function formIsInvalid(): boolean {
