@@ -4,9 +4,10 @@ import IngredientsTable from "./IngredientsTable";
 import Ingredient from "../../dto/Ingredient";
 import IngredientCategory from "../../dto/IngredientCategory";
 import IngredientErrorForm from "./IngredientErrorForm";
-import { getIngredients, saveIngredient } from "../../api/ingredientApi";
+import { deleteIngredient, getIngredients, saveIngredient } from "../../api/ingredientApi";
 import { getIngredientCategories } from "../../api/ingredientCategoryApi";
 import { toast } from "react-toastify";
+import ConfirmationModal from "../common/ConfirmationModal";
 
 export default function IngredientsPage() {
     const [ingredientForm, setIngredientForm] = useState<Ingredient>(new Ingredient());
@@ -14,6 +15,8 @@ export default function IngredientsPage() {
     const [ingredientCategories, setIngredientCategories] = useState<IngredientCategory[]>([]);
     const [errors, setErrors] = useState<IngredientErrorForm>(new IngredientErrorForm());
     const [toggleButtonText, setToggleButtonText] = useState<string>("Show ingredient form");
+    const [rowTargetId, setRowTargetId] = useState<string>("");
+    const [rowTargetName, setRowTargetName] = useState<string>("");
 
     useEffect(() => {
         const _ingredientCollections: Ingredient[][] = [];
@@ -67,6 +70,28 @@ export default function IngredientsPage() {
             });
     }
 
+    function onIngredientRemovalModalOpen(event: MouseEvent<HTMLElement>) {
+        event.preventDefault();
+        const currentTarget: HTMLElement = event.currentTarget as HTMLElement;
+        if (currentTarget.parentNode) {
+            if (currentTarget.parentNode.parentElement) {
+                let rowId = currentTarget.parentNode.parentElement.id;
+                setRowTargetId(rowId);
+
+                let name = currentTarget.parentNode.parentElement.children[0].innerHTML;
+                setRowTargetName(name);
+            }
+        }
+    }
+
+    function handleIngredientRemoval(event: SyntheticEvent) {
+        event.preventDefault();
+        deleteIngredient(rowTargetId)
+            .then(() => {
+                toast.info(rowTargetName + " deleted from ingredient table");
+            });
+    }
+
     function formIsInvalid() {
         let _errors: any = {};
 
@@ -102,6 +127,12 @@ export default function IngredientsPage() {
 
     return (
         <>
+            <ConfirmationModal
+                id="ingredient_removal"
+                title="Ingredient removal"
+                content={"Delete <strong>" + rowTargetName + "</strong> from ingredient table?"}
+                onConfirmationClicked={handleIngredientRemoval}
+            />
             <h1>Ingredients</h1>
             <div className="card card-body mb-2">
                 <div>
@@ -116,7 +147,7 @@ export default function IngredientsPage() {
             {ingredientCollections.map((ingredientCollection, index) => {
                 return (
                     <div className="card card-body mb-2" key={ingredientCategories[index].id}>
-                        <IngredientsTable categoryName={ingredientCategories[index].name} ingredients={ingredientCollection} />
+                        <IngredientsTable categoryName={ingredientCategories[index].name} ingredients={ingredientCollection} onIngredientRemovalModalOpen={onIngredientRemovalModalOpen} />
                     </div>
                 )
             })}
