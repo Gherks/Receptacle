@@ -1,7 +1,7 @@
 import React, { ChangeEventHandler } from 'react';
 import ReactMarkdown from 'react-markdown';
 
-export default function InstructionsInput(props: { instructions: string, onChange: ChangeEventHandler<HTMLTextAreaElement>}) {
+export default function InstructionsInput(props: { instructions: string, onChange: ChangeEventHandler<HTMLTextAreaElement> }) {
     return (
         <>
             <div className="mb-2" >
@@ -17,10 +17,12 @@ export default function InstructionsInput(props: { instructions: string, onChang
                 </textarea>
             </div>
             <div className="mb-2">
-                <div className="card card-body">
-                    <ReactMarkdown>
-                        {props.instructions ? props.instructions : "Markdown text based upon instructions entered above will end up here"}
-                    </ReactMarkdown>
+                <div className="card">
+                    <div className="card-body">
+                        <ReactMarkdown>
+                            {props.instructions ? props.instructions : "Markdown text based upon instructions entered above will end up here"}
+                        </ReactMarkdown>
+                    </div>
                 </div>
             </div>
             <p>

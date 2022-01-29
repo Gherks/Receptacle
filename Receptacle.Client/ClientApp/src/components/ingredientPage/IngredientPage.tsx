@@ -181,20 +181,22 @@ export default function IngredientsPage() {
                 onConfirmationClicked={handleIngredientRemoval}
             />
             <h1>Ingredients</h1>
-            <div className="card card-body mb-2">
-                <div>
+            <div className="card mb-2">
+                <div className="card-body">
                     <button className="btn btn-primary" type="button" onClick={handleCollapseIngredientFormClick} data-bs-toggle="collapse" data-bs-target="#collapseIngredientForm" aria-expanded="false" aria-controls="collapseIngredientForm">
                         {toggleButtonText}
                     </button>
-                </div>
-                <div className="collapse mt-3" id="collapseIngredientForm">
-                    <IngredientsForm ingredientForm={ingredientForm} ingredientCategories={ingredientCategories} onChange={handleChange} onCategorySelectChange={handleCategorySelectChange} onSubmit={handleSubmit} errors={errors} />
+                    <div className="collapse mt-3" id="collapseIngredientForm">
+                        <IngredientsForm ingredientForm={ingredientForm} ingredientCategories={ingredientCategories} onChange={handleChange} onCategorySelectChange={handleCategorySelectChange} onSubmit={handleSubmit} errors={errors} />
+                    </div>
                 </div>
             </div>
             {ingredientCollections.map((ingredientCollection, index) => {
                 return (
-                    <div className="card card-body mb-2" key={ingredientCategories[index].id}>
-                        <IngredientsTable categoryName={ingredientCategories[index].name} ingredients={ingredientCollection} onIngredientRemovalModalOpen={onIngredientRemovalModalOpen} />
+                    <div className="card mb-2" key={ingredientCategories[index].id}>
+                        <div className="card-body">
+                            <IngredientsTable categoryName={ingredientCategories[index].name} ingredients={ingredientCollection} onIngredientRemovalModalOpen={onIngredientRemovalModalOpen} />
+                        </div>
                     </div>
                 )
             })}

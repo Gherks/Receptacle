@@ -37,38 +37,40 @@ export default function RecipeCreationPage() {
     return (
         <>
             <h1>Recipe creation</h1>
-            <div className="card card-body mb-2">
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-2">
-                        <TextInput
-                            inputForm={{
-                                id: "name",
-                                name: "name",
-                                placeholder: "Name",
-                                value: recipeForm.name,
-                                onChange: handleChange
-                            }}
-                            error={errors.name}
+            <div className="card mb-2">
+                <div className="card-body">
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-2">
+                            <TextInput
+                                inputForm={{
+                                    id: "name",
+                                    name: "name",
+                                    placeholder: "Name",
+                                    value: recipeForm.name,
+                                    onChange: handleChange
+                                }}
+                                error={errors.name}
+                            />
+                        </div>
+                        <div className="mb-2">
+                            <NumberInput
+                                inputForm={{
+                                    id: "basePortions",
+                                    name: "basePortions",
+                                    placeholder: "Base portions",
+                                    value: recipeForm.basePortions,
+                                    onChange: handleChange
+                                }}
+                                error={errors.basePortions}
+                            />
+                        </div>
+                        <InstructionsInput
+                            instructions={recipeForm.instructions}
+                            onChange={handleChange}
                         />
-                    </div>
-                    <div className="mb-2">
-                        <NumberInput
-                            inputForm={{
-                                id: "basePortions",
-                                name: "basePortions",
-                                placeholder: "Base portions",
-                                value: recipeForm.basePortions,
-                                onChange: handleChange
-                            }}
-                            error={errors.basePortions}
-                        />
-                    </div>
-                    <InstructionsInput
-                        instructions={recipeForm.instructions}
-                        onChange={handleChange}
-                    />
-                    <button className="btn btn-primary" type="submit">Add recipe</button>
-                </form >
+                        <button className="btn btn-primary" type="submit">Add recipe</button>
+                    </form >
+                </div>
             </div>
         </>
     );
