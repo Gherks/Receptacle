@@ -164,7 +164,8 @@ export default function IngredientsPage() {
     }
 
     function handleCollapseIngredientFormClick(event: MouseEvent<HTMLElement>): void {
-        if (event.currentTarget.innerText === "Show ingredient form") {
+        let collapseIngredientFormElement = document.getElementById("collapseIngredientForm");
+        if (collapseIngredientFormElement && collapseIngredientFormElement.offsetHeight === 0) {
             setToggleButtonText("Hide ingredient form");
         } else {
             setToggleButtonText("Show ingredient form");
