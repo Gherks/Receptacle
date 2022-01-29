@@ -2,11 +2,13 @@ import React, { ChangeEventHandler, FormEventHandler } from 'react';
 import Ingredient from '../../../dto/Ingredient';
 import TextInput from './../../common/TextInput';
 import NumberInput from './../../common/NumberInput';
-import IngredientErrorForm from './IngredientErrorForm';
+import SelectInput from './../../common/SelectInput';
+import { IngredientForm, IngredientErrorForm } from './Forms';
 import IngredientCategory from '../../../dto/IngredientCategory';
+import { emptyGuid } from '../../../utility/Guid';
 
 function IngredientsForm(props: {
-    ingredientForm: Ingredient,
+    ingredientForm: IngredientForm,
     ingredientCategories: IngredientCategory[],
     onChange: ChangeEventHandler<HTMLInputElement>,
     onCategorySelectChange: ChangeEventHandler<HTMLSelectElement>,
@@ -76,14 +78,18 @@ function IngredientsForm(props: {
                 />
             </div>
             <div className="mb-2">
-                <select className="form-select" onChange={props.onCategorySelectChange}>
-                    <option selected value="">Choose a category...</option>
-                    {props.ingredientCategories.map(ingredientCategory => {
-                        return (
-                            <option value={ingredientCategory.id}>{ingredientCategory.name}</option>
-                        )
-                    })}
-                </select>
+                <SelectInput
+                    inputForm={{
+                        id: "category-selector",
+                        name: "category-selector",
+                        value: props.ingredientForm.selectedCategoryId,
+                        onSelectChange: props.onCategorySelectChange,
+                        options: [{ value: emptyGuid, label: "Choose a category..." }].concat(props.ingredientCategories.map(ingredientCategory => {
+                            return { value: ingredientCategory.id, label: ingredientCategory.name };
+                        }))
+                    }}
+                    error={props.errors.category}
+                />
             </div>
             <button className="btn btn-primary" type="submit">Add ingredient</button>
         </form >
@@ -91,3 +97,5 @@ function IngredientsForm(props: {
 };
 
 export default IngredientsForm;
+
+
